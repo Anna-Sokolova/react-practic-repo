@@ -1,0 +1,15 @@
+.Counter {
+  width: 400px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid rgb(119, 116, 116);
+  text-align: center;
+}
+
+.Counter__value {
+  margin-right: 15px;
+  margin-left: 15px;
+  font-size: 64px;
+  font-family: monospace;
+  text-align: center;
+}
