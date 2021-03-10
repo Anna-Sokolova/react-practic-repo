@@ -1,7 +1,6 @@
-import Button from "./Button"
-import Form from "./Form"
+import Form from "./Form/Form";
 
-const HomePage = ({title, greating}) => {
+const HomePage = ({ title, greating }) => {
   return (
     <>
       <h1>{title}</h1>
@@ -11,4 +10,4 @@ const HomePage = ({title, greating}) => {
   );
 };
 
- export default HomePage;
+export default HomePage;

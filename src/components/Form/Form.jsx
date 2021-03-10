@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../Button/Button";
 import Input from "./Input";
 
 const Form = () => {
@@ -6,7 +6,7 @@ const Form = () => {
     <form>
       <Input label="login" placeholder="Enter your name" />
       <Input label="password" placeholder="Enter your password" />
-      <Button name="Submit"/>
+      <Button name="Submit" />
     </form>
   );
 };
