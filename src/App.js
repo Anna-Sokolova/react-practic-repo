@@ -1,10 +1,10 @@
 //Components
 import { Component } from 'react';
-// import HomePage from './components/HomePage';
 import Counter from './components/Counter/Counter';
 import Dropdown from './components/Dropdown/Dropdown';
 import ColorPicker from './components/ColorPicker/ColorPicker';
 import TodoList from './components/TodoList';
+import Form from './components/Form/Form';
 
 //files from db
 import initialTodos from './db/todos.json';
@@ -31,6 +31,11 @@ class App extends Component {
       todos: prevState.todos.filter(todo => todo.id !== todoId),
     }));
   };
+
+  submitFormHandler = data => {
+    console.log(data);
+  };
+
   render() {
     const { todos } = this.state; // деструкт свойств обекта state
     const totalTodos = todos.length;
@@ -46,11 +51,12 @@ class App extends Component {
 
     return (
       <>
-        {/* <HomePage title={'Learn React'} greating={'Hello, React!'} /> */}
+        <Form onSubmit={this.submitFormHandler} />
+
         <Counter initialValue={0} />
         <Dropdown />
         <ColorPicker options={colorPickerOptions} />
-        
+
         <TodoList todos={todos} ondeleteTodo={this.deleteTodo} />
         <div>
           <p>Общее кол-во: {totalTodos}</p>
