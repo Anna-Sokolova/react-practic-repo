@@ -1,10 +1,17 @@
-import { Component } from 'react';
+import { PureComponent } from 'react'; //используем PureComponent чтобы не было перерендера при нажатии на один и тот же элемент (выбор цвета в данном случае)
 import styles from './ColorPicker.module.css';
 
-class ColorPicker extends Component {
+class ColorPicker extends PureComponent {
   state = {
     activeOptionIdx: 0, // записываем в объект состояния начальный индекс массива
   };
+
+  //если наследовать от обычного Component, тогда лучше делать проверку в shouldComponentUpdate
+  // на сравнение изменений в одном и том же элементе
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.activeOptionIdx !== this.state.activeOptionIdx;
+  // }
 
   //метод выбора цвета по клику на кнопку
   setActivColor = index => {
@@ -24,6 +31,8 @@ class ColorPicker extends Component {
   };
 
   render() {
+    // console.log(Math.random()); //консоль для проверки ре-рендера
+
     //вычисляемые свойства
     const activColorBtn = this.props.options; //получаем весь массив значений в переменной
     const activColorBtnIndex = activColorBtn[this.state.activeOptionIdx]; //получаем значение в массиве по необх индексу

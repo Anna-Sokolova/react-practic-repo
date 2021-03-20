@@ -2,12 +2,14 @@ import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 //Components
+import Modal from './components/Modal';
 import Counter from './components/Counter/Counter';
 import Dropdown from './components/Dropdown/Dropdown';
 import ColorPicker from './components/ColorPicker/ColorPicker';
 import TodoList from './components/TodoList';
 import TodoEditor from './components/TodoEditor/TodoEditor';
 import Filter from './components/Filter/Filter';
+import Timer from './components/Timer';
 // import Form from './components/Form/Form';
 
 //files from db
@@ -29,8 +31,28 @@ class App extends Component {
   state = {
     todos: initialTodos,
     filter: '',
+    showModal: false,
+    showTimer: false,
   };
 
+  componentDidMount() {
+    //парсим данные из LS
+    const savedContacts = localStorage.getItem('todos');
+    const parsedContacts = JSON.parse(savedContacts);
+    //делаем проверку на пустоту (null) и достаем данные из LS для отрисовки в рендере
+    if (parsedContacts) {
+      this.setState({
+        todos: parsedContacts,
+      });
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    //сохраняем данные в LS в проверке сравнения массивов на отличия в данных
+    if (this.state.todos !== prevState.todos) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+  }
   //метод для получения данных с component Form в Арр
   // submitFormHandler = data => {
   //   console.log(data);
@@ -122,6 +144,20 @@ class App extends Component {
     );
   };
 
+  //метод для закрытия и открытия модалки
+  toggleModal = () => {
+    this.setState(state => ({
+      showModal: !this.state.showModal,
+    }));
+  };
+
+  //метод для открытия и закрытия таймера
+  toggleTimer = () => {
+    this.setState(state => ({
+      showTimer: !this.state.showTimer,
+    }));
+  };
+
   render() {
     const { todos, filter } = this.state; // деструкт свойств обекта state
     const totalTodos = todos.length;
@@ -132,10 +168,31 @@ class App extends Component {
     return (
       <>
         {/* <Form onSubmit={this.submitFormHandler} /> */}
-
+        <button type="button" onClick={this.toggleTimer}>
+          {this.state.showTimer ? 'Скрыть время' : 'Показать время'}
+        </button>
+        {this.state.showTimer && <Timer />}
+        <button type="button" onClick={this.toggleModal}>
+          Открыть модалку
+        </button>
+        {this.state.showModal && (
+          <Modal onClose={this.toggleModal}>
+            <h1>Заголовок модалки</h1>
+            <ColorPicker options={colorPickerOptions} />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              ut rerum libero fugiat tenetur adipisci nostrum laboriosam
+              voluptatem perferendis laborum molestias nam at obcaecati
+              voluptatibus quia, praesentium consectetur vel debitis qui? Omnis
+              impedit voluptatibus quisquam iste ab facere animi tenetur!
+            </p>
+            <button type="button" onClick={this.toggleModal}>
+              Закрыть модалку
+            </button>
+          </Modal>
+        )}
         <Counter initialValue={0} />
         <Dropdown />
-        <ColorPicker options={colorPickerOptions} />
 
         <TodoEditor onSubmit={this.addTodoBySubmit} />
         <Filter valueFilter={filter} onChangeFilter={this.changeFilter} />
