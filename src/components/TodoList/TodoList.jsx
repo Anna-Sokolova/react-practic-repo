@@ -1,4 +1,6 @@
 import React from 'react';
+import { ReactComponent as DeleteIcon } from '../../icons/delete.svg';
+import IconButton from '../IconButton';
 import './TodoList.css';
 
 const TodoList = ({ todos, ondeleteTodo, onToggleCompleted }) => {
@@ -23,13 +25,19 @@ const TodoList = ({ todos, ondeleteTodo, onToggleCompleted }) => {
           >
             {todo.text}
           </p>
-          <button
+          {/* <button
             type="button"
             className="TodoList__btn"
             onClick={() => ondeleteTodo(todo.id)}
           >
             Удалить
-          </button>
+          </button> */}
+          <IconButton
+            onClick={() => ondeleteTodo(todo.id)}
+            aria-label="Delete Todo"
+          >
+            <DeleteIcon width="30" height="30" />
+          </IconButton>
         </li>
       ))}
     </ul>

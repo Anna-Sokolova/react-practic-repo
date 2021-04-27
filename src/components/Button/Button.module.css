@@ -1,0 +1,18 @@
+.btnClose {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(152 154 150);
+  color: rgb(31, 29, 29);
+  cursor: pointer;
+  outline: none;
+}

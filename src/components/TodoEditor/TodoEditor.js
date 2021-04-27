@@ -13,7 +13,7 @@ class TodoEditor extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // console.log(this.state);
-    this.props.onSubmit(this.state.message);
+    this.props.onSubmit(this.state.message); //прокидываем данные с инпута в APP как пропы
     this.reset();
   };
 

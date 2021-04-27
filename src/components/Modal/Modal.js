@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom'; // импорт метода для создания портала для модалки
+import Button from '../Button/Button'
 import styles from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root'); //находим элемент в ДОМе, чтоб зарендерить в него разметку модалки
@@ -33,6 +34,7 @@ class Modal extends Component {
     return createPortal(
       <div className={styles.modalBackdrop} onClick={this.handleBackdropClose}>
         <div className={styles.modalContent}>{this.props.children}</div>
+
       </div>,
       modalRoot,
     );
